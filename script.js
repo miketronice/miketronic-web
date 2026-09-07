@@ -24,6 +24,9 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+const aboutPills = document.querySelector('.about-copy .pill-row');
+aboutPills?.remove();
+
 const backToTop = document.querySelector('.back-to-top');
 const updateBackToTop = () => backToTop?.classList.toggle('visible', window.scrollY > 500);
 window.addEventListener('scroll', updateBackToTop, { passive: true });
