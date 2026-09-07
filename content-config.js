@@ -1,6 +1,7 @@
 // CONTENIDOS DESTACADOS
 // Edita este archivo para cambiar las tres cajas de "Últimos contenidos".
-// En la mayoría de casos basta con sustituir url, título, etiqueta, imagen y descripción.
+// YouTube: basta con cambiar la URL del vídeo.
+// Electromecánikos: basta con cambiar la URL del artículo; título, imagen y resumen se obtienen automáticamente desde Blogger.
 
 window.MIKETRONIC_CONTENT = [
   {
@@ -23,9 +24,6 @@ window.MIKETRONIC_CONTENT = [
     type: 'electromecanikos',
     url: 'https://www.electromecanikos.es/2025/12/desactivar-start-stop-grupo-vag-con.html',
     tag: 'ELECTROMECÁNIKOS',
-    title: 'Desactivar Start-Stop en el Grupo VAG',
-    description: 'Artículo destacado de Electromecánikos.',
-    image: '',
     moreUrl: 'https://www.electromecanikos.es/search/label/Miketronic'
   }
 ];
