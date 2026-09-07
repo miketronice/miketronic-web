@@ -113,3 +113,39 @@ if (carousel) {
     }
   });
 }
+
+const contentGrid = document.querySelector('.content-grid');
+
+if (contentGrid && Array.isArray(window.MIKETRONIC_CONTENT)) {
+  const getYouTubeId = (url = '') => {
+    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([^?&/]+)/i);
+    return match ? match[1] : '';
+  };
+
+  const escapeHtml = (value = '') => String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+
+  contentGrid.innerHTML = window.MIKETRONIC_CONTENT.slice(0, 3).map((item, index) => {
+    const delay = index === 1 ? ' delay-1' : index === 2 ? ' delay-2' : '';
+    const tag = escapeHtml(item.tag || 'CONTENIDO');
+    const title = escapeHtml(item.title || 'Contenido destacado');
+    const description = escapeHtml(item.description || '');
+    const url = escapeHtml(item.url || '#');
+
+    if (item.type === 'youtube') {
+      const videoId = getYouTubeId(item.url);
+      const embed = videoId ? `https://www.youtube-nocookie.com/embed/${videoId}` : '';
+      const channelUrl = escapeHtml(item.channelUrl || item.url || '#');
+      return `<article class="content-card reveal${delay}"><div class="content-thumb youtube-thumb">${embed ? `<iframe src="${embed}" title="${title}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>` : 'AQUÍ VÍDEO'}</div><div class="youtube-card-body"><span class="content-tag">${tag}</span><h3>${title}</h3>${description ? `<p>${description}</p>` : ''}<a class="youtube-more" href="${channelUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> Ver más en YouTube</a></div></article>`;
+    }
+
+    const image = item.image ? `<img src="${escapeHtml(item.image)}" alt="${title}" loading="lazy">` : 'AQUÍ IMAGEN';
+    return `<article class="content-card reveal${delay}"><a class="content-card-link" href="${url}" target="_blank" rel="noopener noreferrer"><div class="content-thumb">${image}</div><div><span class="content-tag">${tag}</span><h3>${title}</h3>${description ? `<p>${description}</p>` : ''}<span class="text-link">Ver contenido →</span></div></a></article>`;
+  }).join('');
+
+  document.querySelectorAll('.content-grid .reveal').forEach(el => observer.observe(el));
+}
