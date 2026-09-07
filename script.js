@@ -26,6 +26,19 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
+const backToTop = document.querySelector('.back-to-top');
+
+const updateBackToTop = () => {
+  backToTop?.classList.toggle('visible', window.scrollY > 500);
+};
+
+window.addEventListener('scroll', updateBackToTop, { passive: true });
+updateBackToTop();
+
+backToTop?.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 const carousel = document.querySelector('.about-carousel');
 
 if (carousel) {
