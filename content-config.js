@@ -20,11 +20,12 @@ window.MIKETRONIC_CONTENT = [
     channelUrl: 'https://www.youtube.com/@miketronic_'
   },
   {
-    type: 'article',
-    url: 'AQUI_ENLACE_ARTICULO_ELECTROMECANIKOS',
+    type: 'electromecanikos',
+    url: 'https://www.electromecanikos.es/2025/12/desactivar-start-stop-grupo-vag-con.html',
     tag: 'ELECTROMECÁNIKOS',
-    title: 'Artículo destacado de Electromecánikos',
-    description: 'Selecciona el artículo que quieras destacar y sustituye aquí su información.',
-    image: ''
+    title: 'Desactivar Start-Stop en el Grupo VAG',
+    description: 'Artículo destacado de Electromecánikos.',
+    image: '',
+    moreUrl: 'https://www.electromecanikos.es/search/label/Miketronic'
   }
 ];
