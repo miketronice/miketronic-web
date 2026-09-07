@@ -1,7 +1,7 @@
 // CONTENIDOS DESTACADOS
 // Edita este archivo para cambiar las tres cajas de "Últimos contenidos".
 // YouTube: basta con cambiar la URL del vídeo.
-// Electromecánikos: basta con cambiar la URL del artículo; título, imagen y resumen se obtienen automáticamente desde Blogger.
+// Electromecánikos: esta caja dirige a tus entradas con la etiqueta Miketronic.
 
 window.MIKETRONIC_CONTENT = [
   {
@@ -22,8 +22,10 @@ window.MIKETRONIC_CONTENT = [
   },
   {
     type: 'electromecanikos',
-    url: 'https://www.electromecanikos.es/2025/12/desactivar-start-stop-grupo-vag-con.html',
+    url: 'https://www.electromecanikos.es/search/label/Miketronic',
     tag: 'ELECTROMECÁNIKOS',
+    title: 'Mis entradas en Electromecánikos',
+    description: 'Artículos, tutoriales y contenido técnico publicado por Miketronic.',
     moreUrl: 'https://www.electromecanikos.es/search/label/Miketronic'
   }
 ];
