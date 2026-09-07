@@ -137,8 +137,8 @@ if (contentGrid && Array.isArray(window.MIKETRONIC_CONTENT)) {
 
     const title = escapeHtml(item.title || 'Contenido destacado');
     const description = escapeHtml(item.description || '');
-    const image = item.image ? `<img src="${escapeHtml(item.image)}" alt="${title}" loading="lazy">` : 'AQUÍ IMAGEN';
-    return `<article class="content-card reveal${delay}"><a class="content-card-link" href="${url}" target="_blank" rel="noopener noreferrer"><div class="content-thumb">${image}</div><div><span class="content-tag">${tag}</span><h3>${title}</h3>${description ? `<p>${description}</p>` : ''}<span class="text-link">Ver contenido →</span></div></a></article>`;
+    const image = item.image ? `<img src="${escapeHtml(item.image)}" alt="${title}" loading="lazy">` : `<div style="width:100%;height:100%;display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,rgba(24,168,255,.12),rgba(5,9,13,.98) 68%);color:#547184;font-size:.72rem;letter-spacing:.12em">CONTENIDO</div>`;
+    return `<article class="content-card reveal${delay}"><a class="content-card-link" href="${url}" target="_blank" rel="noopener noreferrer"><div class="content-thumb article-thumb">${image}</div></a><div class="youtube-card-body"><span class="content-tag">${tag}</span><h3>${title}</h3>${description ? `<p>${description}</p>` : ''}<a class="electromecanikos-more" href="${url}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-right"></i> Ver contenido</a></div></article>`;
   }).join('');
 
   document.querySelectorAll('.content-grid .reveal').forEach(el => observer.observe(el));
