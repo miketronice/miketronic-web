@@ -110,15 +110,6 @@ if (contentGrid && Array.isArray(window.MIKETRONIC_CONTENT)) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 
-  const slugTitle = (url = '') => {
-    try {
-      const slug = new URL(url).pathname.split('/').filter(Boolean).pop()?.replace(/\.html$/i, '') || 'Artículo destacado';
-      return slug.split('-').filter(Boolean).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-    } catch {
-      return 'Artículo destacado';
-    }
-  };
-
   contentGrid.innerHTML = window.MIKETRONIC_CONTENT.slice(0, 3).map((item, index) => {
     const delay = index === 1 ? ' delay-1' : index === 2 ? ' delay-2' : '';
     const tag = escapeHtml(item.tag || 'CONTENIDO');
@@ -126,19 +117,19 @@ if (contentGrid && Array.isArray(window.MIKETRONIC_CONTENT)) {
 
     if (item.type === 'youtube') {
       const title = escapeHtml(item.title || 'Vídeo destacado de Miketronic');
+      const description = escapeHtml(item.description || '');
       const videoId = getYouTubeId(item.url);
       const embed = videoId ? `https://www.youtube-nocookie.com/embed/${videoId}` : '';
       const channelUrl = escapeHtml(item.channelUrl || item.url || '#');
-      return `<article class="content-card reveal${delay}"><div class="content-thumb youtube-thumb">${embed ? `<iframe src="${embed}" title="${title}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>` : 'AQUÍ VÍDEO'}</div><div class="youtube-card-body"><span class="content-tag">${tag}</span><h3>${title}</h3><a class="youtube-more" href="${channelUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> Ver más en YouTube</a></div></article>`;
+      return `<article class="content-card reveal${delay}"><div class="content-thumb youtube-thumb">${embed ? `<iframe src="${embed}" title="${title}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>` : 'AQUÍ VÍDEO'}</div><div class="youtube-card-body"><span class="content-tag">${tag}</span><h3>${title}</h3>${description ? `<p>${description}</p>` : ''}<a class="youtube-more" href="${channelUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> Ver más en YouTube</a></div></article>`;
     }
 
     if (item.type === 'electromecanikos') {
-      const title = escapeHtml(item.title || slugTitle(item.url));
-      const moreUrl = escapeHtml(item.moreUrl || 'https://www.electromecanikos.es/search/label/Miketronic');
-      const visual = item.image
-        ? `<img src="${escapeHtml(item.image)}" alt="${title}" loading="lazy">`
-        : `<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:radial-gradient(circle at 50% 45%,rgba(24,168,255,.22),rgba(5,9,13,.98) 62%);color:#f5f8fb"><div style="font:700 2.4rem 'Space Grotesk',sans-serif;letter-spacing:-.04em">ELECTROMECÁNIKOS</div><div style="font-size:.72rem;letter-spacing:.18em;color:#5cc8ff">AUTOMOTIVE TECH</div></div>`;
-      return `<article class="content-card reveal${delay}"><a class="content-card-link article-main-link" href="${url}" target="_blank" rel="noopener noreferrer"><div class="content-thumb article-thumb">${visual}</div><div><span class="content-tag">${tag}</span><h3>${title}</h3></div></a><div class="article-actions"><a class="electromecanikos-more" href="${moreUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-bolt"></i> Ver más en Electromecánikos</a></div></article>`;
+      const title = escapeHtml(item.title || 'Mis entradas en Electromecánikos');
+      const description = escapeHtml(item.description || '');
+      const moreUrl = escapeHtml(item.moreUrl || item.url || 'https://www.electromecanikos.es/search/label/Miketronic');
+      const visual = `<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:radial-gradient(circle at 50% 45%,rgba(24,168,255,.22),rgba(5,9,13,.98) 62%);color:#f5f8fb"><div style="font:700 2.15rem 'Space Grotesk',sans-serif;letter-spacing:-.04em">ELECTROMECÁNIKOS</div><div style="font-size:.72rem;letter-spacing:.18em;color:#5cc8ff">AUTOMOTIVE TECH</div></div>`;
+      return `<article class="content-card reveal${delay}"><a class="content-card-link" href="${url}" target="_blank" rel="noopener noreferrer"><div class="content-thumb article-thumb">${visual}</div></a><div class="youtube-card-body"><span class="content-tag">${tag}</span><h3>${title}</h3>${description ? `<p>${description}</p>` : ''}<a class="electromecanikos-more" href="${moreUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-bolt"></i> Ver más en Electromecánikos</a></div></article>`;
     }
 
     const title = escapeHtml(item.title || 'Contenido destacado');
