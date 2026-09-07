@@ -30,19 +30,30 @@ window.MIKETRONIC_CONTENT = [
   }
 ];
 
-// Imagen del proyecto Electromecánikos manteniendo el tratamiento circular y desvanecido.
-const electromecanikosProjectArt = document.querySelector('.project-art-one');
-if (electromecanikosProjectArt) {
-  const mark = electromecanikosProjectArt.querySelector('span');
-  if (mark) {
-    mark.textContent = '';
-    mark.style.width = 'clamp(125px, 15vw, 185px)';
-    mark.style.aspectRatio = '1';
-    mark.style.borderRadius = '50%';
-    mark.style.display = 'block';
-    mark.style.backgroundImage = "radial-gradient(circle, transparent 54%, rgba(11,22,32,.18) 70%, #0b1620 100%), url('assets/about/logo_electromecanikos.es_2.jpg')";
-    mark.style.backgroundSize = 'cover';
-    mark.style.backgroundPosition = 'center';
-    mark.style.boxShadow = '0 0 42px rgba(24,168,255,.16)';
-  }
+// Tratamiento visual circular y desvanecido para las imágenes de los proyectos.
+const applyProjectArtwork = (selector, imageUrl) => {
+  const projectArt = document.querySelector(selector);
+  if (!projectArt) return;
+  const mark = projectArt.querySelector('span');
+  if (!mark) return;
+  mark.textContent = '';
+  mark.style.width = 'clamp(125px, 15vw, 185px)';
+  mark.style.aspectRatio = '1';
+  mark.style.borderRadius = '50%';
+  mark.style.display = 'block';
+  mark.style.backgroundImage = `radial-gradient(circle, transparent 54%, rgba(11,22,32,.18) 70%, #0b1620 100%), url('${imageUrl}')`;
+  mark.style.backgroundSize = 'cover';
+  mark.style.backgroundPosition = 'center';
+  mark.style.boxShadow = '0 0 42px rgba(24,168,255,.16)';
+};
+
+applyProjectArtwork('.project-art-one', 'assets/about/logo_electromecanikos.es_2.jpg');
+applyProjectArtwork('.project-art-two', 'assets/about/mtmanager_miketronic.jpg');
+
+// Enlace directo al proyecto Electromecánikos.
+const electromecanikosProjectLink = document.querySelector('.project-card:first-child .text-link');
+if (electromecanikosProjectLink) {
+  electromecanikosProjectLink.href = 'https://www.electromecanikos.es/';
+  electromecanikosProjectLink.target = '_blank';
+  electromecanikosProjectLink.rel = 'noopener noreferrer';
 }
