@@ -25,7 +25,7 @@ window.MIKETRONIC_CONTENT = [
     url: 'https://www.electromecanikos.es/search/label/Miketronic',
     tag: 'ELECTROMECÁNIKOS',
     title: 'Mis entradas en Electromecánikos',
-    description: 'Artículos, tutoriales y contenido técnico publicado por Miketronic.',
+    description: '',
     moreUrl: 'https://www.electromecanikos.es/search/label/Miketronic'
   }
 ];
