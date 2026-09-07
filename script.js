@@ -128,7 +128,7 @@ if (contentGrid && Array.isArray(window.MIKETRONIC_CONTENT)) {
       const title = escapeHtml(item.title || 'Mis entradas en Electromecánikos');
       const description = escapeHtml(item.description || '');
       const moreUrl = escapeHtml(item.moreUrl || item.url || 'https://www.electromecanikos.es/search/label/Miketronic');
-      const visual = `<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:radial-gradient(circle at 50% 45%,rgba(24,168,255,.22),rgba(5,9,13,.98) 62%);color:#f5f8fb"><div style="font:700 2.15rem 'Space Grotesk',sans-serif;letter-spacing:-.04em">ELECTROMECÁNIKOS</div><div style="font-size:.72rem;letter-spacing:.18em;color:#5cc8ff">AUTOMOTIVE TECH</div></div>`;
+      const visual = `<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:radial-gradient(circle at 50% 45%,rgba(24,168,255,.22),rgba(5,9,13,.98) 62%);color:#f5f8fb"><div style="font:700 2.15rem 'Space Grotesk',sans-serif;letter-spacing:-.04em">ELECTROMECÁNIKOS</div><div style="font-size:.72rem;letter-spacing:.18em;color:#5cc8ff">BY MIKETRONIC</div></div>`;
       return `<article class="content-card reveal${delay}"><a class="content-card-link" href="${url}" target="_blank" rel="noopener noreferrer"><div class="content-thumb article-thumb">${visual}</div></a><div class="youtube-card-body"><span class="content-tag">${tag}</span><h3>${title}</h3>${description ? `<p>${description}</p>` : ''}<a class="electromecanikos-more" href="${moreUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-bolt"></i> Ver más en Electromecánikos</a></div></article>`;
     }
 
