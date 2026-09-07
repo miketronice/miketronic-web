@@ -91,15 +91,84 @@ if (contentGrid && Array.isArray(window.MIKETRONIC_CONTENT)) {
     const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([^?&/]+)/i);
     return match ? match[1] : '';
   };
+
   const escapeHtml = (value = '') => String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+
+  const slugTitle = (url = '') => {
+    try {
+      const slug = new URL(url).pathname.split('/').filter(Boolean).pop()?.replace(/\.html$/i, '') || 'Artículo destacado';
+      return slug.split('-').filter(Boolean).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    } catch { return 'Artículo destacado'; }
+  };
+
+  const getBloggerImage = (entry) => {
+    if (entry?.media$thumbnail?.url) return entry.media$thumbnail.url.replace(/\/s72-c\//, '/s1200/');
+    const html = entry?.content?.$t || entry?.summary?.$t || '';
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const img = doc.querySelector('img');
+    return img?.getAttribute('src') || '';
+  };
+
+  const getBloggerDescription = (entry) => {
+    const html = entry?.summary?.$t || entry?.content?.$t || '';
+    if (!html) return '';
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const text = (doc.body.textContent || '').replace(/\s+/g, ' ').trim();
+    return text.length > 145 ? `${text.slice(0, 142).trim()}…` : text;
+  };
+
+  const loadBloggerPost = (item, card) => {
+    let parsed;
+    try { parsed = new URL(item.url); } catch { return; }
+    if (!/electromecanikos\.es$/i.test(parsed.hostname)) return;
+
+    const slug = parsed.pathname.split('/').filter(Boolean).pop()?.replace(/\.html$/i, '') || '';
+    const query = slug.split('-').filter(word => word.length > 2 && !['con','para','del','las','los','una','uno','que','por'].includes(word)).slice(0, 7).join(' ');
+    if (!query) return;
+
+    const callbackName = `miketronicBlogger_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    const script = document.createElement('script');
+    const cleanup = () => {
+      try { delete window[callbackName]; } catch { window[callbackName] = undefined; }
+      script.remove();
+    };
+
+    window[callbackName] = (data) => {
+      try {
+        const entries = data?.feed?.entry || [];
+        const targetPath = parsed.pathname.replace(/\/$/, '');
+        const entry = entries.find(post => {
+          const alternate = post.link?.find(link => link.rel === 'alternate')?.href;
+          if (!alternate) return false;
+          try { return new URL(alternate).pathname.replace(/\/$/, '') === targetPath; } catch { return false; }
+        }) || entries[0];
+
+        if (!entry) return;
+        const title = entry.title?.$t || slugTitle(item.url);
+        const image = getBloggerImage(entry);
+        const description = getBloggerDescription(entry);
+        const titleEl = card.querySelector('h3');
+        const descEl = card.querySelector('.article-description');
+        const thumb = card.querySelector('.content-thumb');
+        if (titleEl) titleEl.textContent = title;
+        if (description && descEl) descEl.textContent = description;
+        if (image && thumb) thumb.innerHTML = `<img src="${escapeHtml(image)}" alt="${escapeHtml(title)}" loading="lazy">`;
+      } finally { cleanup(); }
+    };
+
+    script.onerror = cleanup;
+    script.src = `${parsed.origin}/feeds/posts/default?alt=json-in-script&max-results=20&q=${encodeURIComponent(query)}&callback=${encodeURIComponent(callbackName)}`;
+    document.head.appendChild(script);
+  };
 
   contentGrid.innerHTML = window.MIKETRONIC_CONTENT.slice(0, 3).map((item, index) => {
     const delay = index === 1 ? ' delay-1' : index === 2 ? ' delay-2' : '';
     const tag = escapeHtml(item.tag || 'CONTENIDO');
-    const title = escapeHtml(item.title || 'Contenido destacado');
+    const fallbackTitle = item.type === 'electromecanikos' ? slugTitle(item.url) : (item.title || 'Contenido destacado');
+    const title = escapeHtml(fallbackTitle);
     const description = escapeHtml(item.description || '');
     const url = escapeHtml(item.url || '#');
-    const image = item.image ? `<img src="${escapeHtml(item.image)}" alt="${title}" loading="lazy">` : 'AQUÍ IMAGEN';
+    const image = item.image ? `<img src="${escapeHtml(item.image)}" alt="${title}" loading="lazy">` : 'CARGANDO...';
 
     if (item.type === 'youtube') {
       const videoId = getYouTubeId(item.url);
@@ -109,11 +178,17 @@ if (contentGrid && Array.isArray(window.MIKETRONIC_CONTENT)) {
     }
 
     if (item.type === 'electromecanikos') {
-      const moreUrl = escapeHtml(item.moreUrl || 'https://www.electromecanikos.es/');
-      return `<article class="content-card reveal${delay}"><a class="content-card-link article-main-link" href="${url}" target="_blank" rel="noopener noreferrer"><div class="content-thumb">${image}</div><div><span class="content-tag">${tag}</span><h3>${title}</h3>${description ? `<p>${description}</p>` : ''}</div></a><div class="article-actions"><a class="electromecanikos-more" href="${moreUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-bolt"></i> Ver más en Electromecánikos</a></div></article>`;
+      const moreUrl = escapeHtml(item.moreUrl || 'https://www.electromecanikos.es/search/label/Miketronic');
+      return `<article class="content-card reveal${delay}" data-content-index="${index}"><a class="content-card-link article-main-link" href="${url}" target="_blank" rel="noopener noreferrer"><div class="content-thumb">${image}</div><div><span class="content-tag">${tag}</span><h3>${title}</h3><p class="article-description">Cargando información del artículo…</p></div></a><div class="article-actions"><a class="electromecanikos-more" href="${moreUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-bolt"></i> Ver más en Electromecánikos</a></div></article>`;
     }
 
-    return `<article class="content-card reveal${delay}"><a class="content-card-link" href="${url}" target="_blank" rel="noopener noreferrer"><div class="content-thumb">${image}</div><div><span class="content-tag">${tag}</span><h3>${title}</h3>${description ? `<p>${description}</p>` : ''}<span class="text-link">Ver contenido →</span></div></a></article>`;
+    return `<article class="content-card reveal${delay}"><a class="content-card-link" href="${url}" target="_blank" rel="noopener noreferrer"><div class="content-thumb">${item.image ? image : 'AQUÍ IMAGEN'}</div><div><span class="content-tag">${tag}</span><h3>${title}</h3>${description ? `<p>${description}</p>` : ''}<span class="text-link">Ver contenido →</span></div></a></article>`;
   }).join('');
+
   document.querySelectorAll('.content-grid .reveal').forEach(el => observer.observe(el));
+  window.MIKETRONIC_CONTENT.slice(0, 3).forEach((item, index) => {
+    if (item.type !== 'electromecanikos') return;
+    const card = contentGrid.querySelector(`[data-content-index="${index}"]`);
+    if (card) loadBloggerPost(item, card);
+  });
 }
