@@ -33,12 +33,26 @@ const projectGlowFix = document.createElement('style');
 projectGlowFix.textContent = `
 .contact-methods{margin-top:24px}
 @media (max-width:620px){
-  .project-art::before{
-    inset:22% 27% !important;
-    filter:blur(7px) !important;
-    background:radial-gradient(circle,rgba(24,168,255,.22) 0,rgba(24,168,255,.10) 38%,rgba(24,168,255,.025) 58%,transparent 72%) !important;
+  .project-art::before{display:none !important}
+  .project-art span{
+    box-shadow:0 0 22px rgba(24,168,255,.20) !important;
   }
-  .contact-methods{margin-top:28px}
+  .contact-methods{
+    margin-top:28px;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    width:100%;
+    gap:8px;
+  }
+  .contact-methods .social-card{
+    width:100% !important;
+    min-width:0;
+    min-height:50px;
+    padding:0 8px;
+    gap:7px;
+    justify-content:center;
+  }
+  .contact-methods .social-card i{width:auto;font-size:1.05rem}
+  .contact-methods .social-card strong{font-size:clamp(.68rem,3vw,.82rem);white-space:nowrap}
 }
 `;
 document.head.appendChild(projectGlowFix);
