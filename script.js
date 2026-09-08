@@ -34,17 +34,23 @@ responsiveRefinements.textContent = `
 .contact-methods{margin-top:24px}
 @media (max-width:620px){
   .project-card{display:block !important}
-  .project-content{min-height:0 !important;padding:26px 24px 28px !important}
+  .project-content{
+    min-height:0 !important;
+    padding:26px 24px 28px !important;
+    text-align:center !important;
+    align-items:center !important;
+  }
   .project-content .project-art{
     min-height:0 !important;
     height:auto !important;
     padding:0 !important;
-    margin:14px 0 18px !important;
+    margin:16px auto 20px !important;
     display:flex !important;
-    justify-content:flex-start !important;
+    justify-content:center !important;
     align-items:center !important;
     background:none !important;
     overflow:visible !important;
+    width:100% !important;
   }
   .project-content .project-art::before{display:none !important}
   .project-content .project-art span{
@@ -52,7 +58,8 @@ responsiveRefinements.textContent = `
     max-width:34vw !important;
     box-shadow:0 0 18px rgba(24,168,255,.18) !important;
   }
-  .project-content p{margin-top:0 !important}
+  .project-content p{margin-top:0 !important;margin-left:auto !important;margin-right:auto !important}
+  .project-content .project-action,.project-content .project-status{align-self:center !important}
   .contact-methods{
     margin-top:28px;
     grid-template-columns:repeat(3,minmax(0,1fr)) !important;
