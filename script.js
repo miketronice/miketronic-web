@@ -27,6 +27,8 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 const aboutPills = document.querySelector('.about-copy .pill-row');
 aboutPills?.remove();
 
+document.querySelectorAll('.contact-group-label').forEach(label => label.remove());
+
 const backToTop = document.querySelector('.back-to-top');
 const updateBackToTop = () => backToTop?.classList.toggle('visible', window.scrollY > 500);
 window.addEventListener('scroll', updateBackToTop, { passive: true });
