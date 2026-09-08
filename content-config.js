@@ -31,11 +31,13 @@ window.MIKETRONIC_CONTENT = [
 ];
 
 // Tratamiento visual circular y desvanecido para las imágenes de los proyectos.
+const projectMedia = window.matchMedia('(max-width: 620px)');
 const applyProjectArtwork = (selector, imageUrl) => {
   const projectArt = document.querySelector(selector);
   if (!projectArt) return;
   const mark = projectArt.querySelector('span');
   if (!mark) return;
+
   mark.textContent = '';
   mark.style.width = 'clamp(125px, 15vw, 185px)';
   mark.style.aspectRatio = '1';
@@ -44,7 +46,20 @@ const applyProjectArtwork = (selector, imageUrl) => {
   mark.style.backgroundImage = `radial-gradient(circle, transparent 54%, rgba(11,22,32,.18) 70%, #0b1620 100%), url('${imageUrl}')`;
   mark.style.backgroundSize = 'cover';
   mark.style.backgroundPosition = 'center';
-  mark.style.boxShadow = '0 0 42px rgba(24,168,255,.16)';
+
+  const updateProjectArtwork = () => {
+    if (projectMedia.matches) {
+      // En móvil eliminamos el gran radial de la caja y dejamos solo un halo corto pegado a la imagen.
+      projectArt.style.background = 'transparent';
+      mark.style.boxShadow = '0 0 16px rgba(24,168,255,.16)';
+    } else {
+      projectArt.style.background = '';
+      mark.style.boxShadow = '0 0 42px rgba(24,168,255,.16)';
+    }
+  };
+
+  updateProjectArtwork();
+  projectMedia.addEventListener?.('change', updateProjectArtwork);
 };
 
 applyProjectArtwork('.project-art-one', 'assets/about/logo_electromecanikos.es_2.jpg');
