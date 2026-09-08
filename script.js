@@ -31,12 +31,14 @@ document.querySelectorAll('.contact-group-label').forEach(label => label.remove(
 
 const projectGlowFix = document.createElement('style');
 projectGlowFix.textContent = `
+.contact-methods{margin-top:24px}
 @media (max-width:620px){
   .project-art::before{
     inset:22% 27% !important;
     filter:blur(7px) !important;
     background:radial-gradient(circle,rgba(24,168,255,.22) 0,rgba(24,168,255,.10) 38%,rgba(24,168,255,.025) 58%,transparent 72%) !important;
   }
+  .contact-methods{margin-top:28px}
 }
 `;
 document.head.appendChild(projectGlowFix);
