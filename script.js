@@ -29,14 +29,30 @@ aboutPills?.remove();
 
 document.querySelectorAll('.contact-group-label').forEach(label => label.remove());
 
-const projectGlowFix = document.createElement('style');
-projectGlowFix.textContent = `
+const responsiveRefinements = document.createElement('style');
+responsiveRefinements.textContent = `
 .contact-methods{margin-top:24px}
 @media (max-width:620px){
-  .project-art::before{display:none !important}
-  .project-art span{
-    box-shadow:0 0 22px rgba(24,168,255,.20) !important;
+  .project-card{display:block !important}
+  .project-content{min-height:0 !important;padding:26px 24px 28px !important}
+  .project-content .project-art{
+    min-height:0 !important;
+    height:auto !important;
+    padding:0 !important;
+    margin:14px 0 18px !important;
+    display:flex !important;
+    justify-content:flex-start !important;
+    align-items:center !important;
+    background:none !important;
+    overflow:visible !important;
   }
+  .project-content .project-art::before{display:none !important}
+  .project-content .project-art span{
+    width:118px !important;
+    max-width:34vw !important;
+    box-shadow:0 0 18px rgba(24,168,255,.18) !important;
+  }
+  .project-content p{margin-top:0 !important}
   .contact-methods{
     margin-top:28px;
     grid-template-columns:repeat(3,minmax(0,1fr)) !important;
@@ -55,7 +71,28 @@ projectGlowFix.textContent = `
   .contact-methods .social-card strong{font-size:clamp(.68rem,3vw,.82rem);white-space:nowrap}
 }
 `;
-document.head.appendChild(projectGlowFix);
+document.head.appendChild(responsiveRefinements);
+
+const projectCards = [...document.querySelectorAll('.project-card')].map(card => {
+  const content = card.querySelector('.project-content');
+  const art = card.querySelector('.project-art');
+  const title = content?.querySelector('h3');
+  return { card, content, art, title };
+});
+
+const placeProjectArtwork = () => {
+  const mobile = window.matchMedia('(max-width:620px)').matches;
+  projectCards.forEach(({ card, content, art, title }) => {
+    if (!content || !art || !title) return;
+    if (mobile) {
+      if (art.parentElement !== content) title.insertAdjacentElement('afterend', art);
+    } else if (art.parentElement !== card) {
+      card.appendChild(art);
+    }
+  });
+};
+placeProjectArtwork();
+window.addEventListener('resize', placeProjectArtwork, { passive: true });
 
 const backToTop = document.querySelector('.back-to-top');
 const updateBackToTop = () => backToTop?.classList.toggle('visible', window.scrollY > 500);
