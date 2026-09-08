@@ -33,6 +33,39 @@ const responsiveRefinements = document.createElement('style');
 responsiveRefinements.textContent = `
 .contact-methods{margin-top:24px}
 @media (max-width:620px){
+  .hero-copy,.about-copy,.section-heading,.contact-wrap>div:first-child,.content-card .youtube-card-body{
+    text-align:center !important;
+  }
+  .hero-actions{justify-content:center !important}
+  .hero-stats{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:6px !important;
+    align-items:stretch !important;
+  }
+  .hero-stats div{
+    padding:0 5px !important;
+    min-width:0 !important;
+    text-align:center !important;
+  }
+  .hero-stats strong{
+    font-size:clamp(1.15rem,5.8vw,1.55rem) !important;
+    line-height:1.1 !important;
+    white-space:nowrap !important;
+  }
+  .hero-stats span{
+    font-size:clamp(.56rem,2.55vw,.72rem) !important;
+    line-height:1.25 !important;
+    overflow-wrap:anywhere;
+  }
+  .about-copy{display:flex;flex-direction:column;align-items:center}
+  .section-heading>div{display:flex;flex-direction:column;align-items:center}
+  .service-card{
+    flex-direction:column !important;
+    justify-content:center !important;
+    text-align:center !important;
+    gap:12px !important;
+  }
+  .service-copy{text-align:center !important}
   .project-card{display:block !important}
   .project-content{
     min-height:0 !important;
@@ -60,6 +93,10 @@ responsiveRefinements.textContent = `
   }
   .project-content p{margin-top:0 !important;margin-left:auto !important;margin-right:auto !important}
   .project-content .project-action,.project-content .project-status{align-self:center !important}
+  .content-card .youtube-card-body{align-items:center !important}
+  .contact-wrap{justify-items:center !important;text-align:center !important}
+  .social-area{display:flex;flex-direction:column;align-items:center}
+  .network-grid{width:100%}
   .contact-methods{
     margin-top:28px;
     grid-template-columns:repeat(3,minmax(0,1fr)) !important;
