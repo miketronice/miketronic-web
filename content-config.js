@@ -38,7 +38,7 @@ window.MIKETRONIC_CONTENT = [
 
 // Alineación uniforme del menú superior.
 const navAlignmentStyle = document.createElement('style');
-navAlignmentStyle.textContent = `.nav-links{align-items:center}.nav-links>a{display:inline-flex;align-items:center;min-height:38px}.nav-services{padding-top:0!important;padding-bottom:0!important}.specialties-services-link{display:flex;justify-content:center;margin-top:30px}.specialties-services-link .btn{min-width:210px;justify-content:center}@media(max-width:620px){.specialties-services-link{margin-top:24px}}`;
+navAlignmentStyle.textContent = `.nav-links{align-items:center}.nav-links>a{display:inline-flex;align-items:center;min-height:38px}.nav-services{padding-top:0!important;padding-bottom:0!important}.specialties-services-link{display:flex;justify-content:center;margin-top:30px}.specialties-services-link .btn{min-width:210px;justify-content:center;border-color:rgba(92,200,255,.34);background:rgba(24,168,255,.07);color:#dff4ff;transition:.2s}.specialties-services-link .btn:hover{border-color:#5cc8ff;background:rgba(24,168,255,.14);box-shadow:0 8px 24px rgba(24,168,255,.12);transform:translateY(-1px)}@media(max-width:620px){.specialties-services-link{margin-top:24px}}`;
 document.head.appendChild(navAlignmentStyle);
 
 // Acceso al listado completo de servicios desde Especialidades.
