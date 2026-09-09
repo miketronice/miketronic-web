@@ -4,7 +4,7 @@
   const stroke = (body) => `<svg class="site-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
   const thinStroke = (body) => `<svg class="site-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
   const fill = (path) => `<svg class="site-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="${path}"/></svg>`;
-  const obdPort = `<svg class="site-icon obd-port-icon" viewBox="0 0 64 46" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M7 6.5h50c1.7 0 2.7 1.35 2.35 3L55.2 32.8c-.3 1.65-1.55 2.7-3.2 2.7H12c-1.65 0-2.9-1.05-3.2-2.7L4.65 9.5c-.35-1.65.65-3 2.35-3Z"/><path d="M11 10.5h42c1.15 0 1.8.85 1.6 2L51.4 30c-.18 1-.95 1.55-2 1.55H14.6c-1.05 0-1.82-.55-2-1.55L9.4 12.5c-.2-1.15.45-2 1.6-2Z"/><g fill="none" stroke="currentColor" stroke-width="1.05"><rect x="11.7" y="14.3" width="4.3" height="4.5" rx=".8"/><rect x="17.0" y="14.3" width="4.3" height="4.5" rx=".8"/><rect x="22.3" y="14.3" width="4.3" height="4.5" rx=".8"/><rect x="27.6" y="14.3" width="4.3" height="4.5" rx=".8"/><rect x="32.9" y="14.3" width="4.3" height="4.5" rx=".8"/><rect x="38.2" y="14.3" width="4.3" height="4.5" rx=".8"/><rect x="43.5" y="14.3" width="4.3" height="4.5" rx=".8"/><rect x="48.8" y="14.3" width="4.3" height="4.5" rx=".8"/><rect x="13.4" y="22.4" width="4.3" height="4.5" rx=".8"/><rect x="18.3" y="22.4" width="4.3" height="4.5" rx=".8"/><rect x="23.2" y="22.4" width="4.3" height="4.5" rx=".8"/><rect x="28.1" y="22.4" width="4.3" height="4.5" rx=".8"/><rect x="33.0" y="22.4" width="4.3" height="4.5" rx=".8"/><rect x="37.9" y="22.4" width="4.3" height="4.5" rx=".8"/><rect x="42.8" y="22.4" width="4.3" height="4.5" rx=".8"/><rect x="47.7" y="22.4" width="4.3" height="4.5" rx=".8"/></g><text x="32" y="43" text-anchor="middle" fill="currentColor" stroke="none" font-size="5" font-family="Inter,system-ui,sans-serif" font-weight="700" letter-spacing="1.1">OBD</text></svg>`;
+  const obdPort = `<svg class="site-icon obd-port-icon" viewBox="0 0 64 38" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M7 6.5h50c1.7 0 2.7 1.35 2.35 3L55.2 32.8c-.3 1.65-1.55 2.7-3.2 2.7H12c-1.65 0-2.9-1.05-3.2-2.7L4.65 9.5c-.35-1.65.65-3 2.35-3Z"/><path d="M11 10.5h42c1.15 0 1.8.85 1.6 2L51.4 30c-.18 1-.95 1.55-2 1.55H14.6c-1.05 0-1.82-.55-2-1.55L9.4 12.5c-.2-1.15.45-2 1.6-2Z"/><g fill="none" stroke="currentColor" stroke-width="1.05"><rect x="11.7" y="14.3" width="4.3" height="4.5" rx=".8"/><rect x="17.0" y="14.3" width="4.3" height="4.5" rx=".8"/><rect x="22.3" y="14.3" width="4.3" height="4.5" rx=".8"/><rect x="27.6" y="14.3" width="4.3" height="4.5" rx=".8"/><rect x="32.9" y="14.3" width="4.3" height="4.5" rx=".8"/><rect x="38.2" y="14.3" width="4.3" height="4.5" rx=".8"/><rect x="43.5" y="14.3" width="4.3" height="4.5" rx=".8"/><rect x="48.8" y="14.3" width="4.3" height="4.5" rx=".8"/><rect x="13.4" y="22.4" width="4.3" height="4.5" rx=".8"/><rect x="18.3" y="22.4" width="4.3" height="4.5" rx=".8"/><rect x="23.2" y="22.4" width="4.3" height="4.5" rx=".8"/><rect x="28.1" y="22.4" width="4.3" height="4.5" rx=".8"/><rect x="33.0" y="22.4" width="4.3" height="4.5" rx=".8"/><rect x="37.9" y="22.4" width="4.3" height="4.5" rx=".8"/><rect x="42.8" y="22.4" width="4.3" height="4.5" rx=".8"/><rect x="47.7" y="22.4" width="4.3" height="4.5" rx=".8"/></g></svg>`;
   const icons = {
     'fa-laptop-code': stroke('<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20M9 9l-2 2 2 2M15 9l2 2-2 2"/>'),
     'fa-microchip': stroke('<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 9h6v6H9zM9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>'),
@@ -36,11 +36,24 @@
     root.querySelectorAll('i[class*="fa-"]').forEach(el => {
       let key = [...el.classList].find(c => icons[c]);
       if (!key) return;
+      const vehicle = el.closest('.vehicle');
       const wrap = document.createElement('span');
-      wrap.innerHTML = el.closest('.vehicle') && key === 'fa-car-side' ? obdPort : icons[key];
+      wrap.innerHTML = vehicle && key === 'fa-car-side' ? obdPort : icons[key];
       const svg = wrap.firstElementChild;
       svg.classList.add(...[...el.classList].filter(c => !c.startsWith('fa-') && c !== 'fa-solid' && c !== 'fa-regular' && c !== 'fa-brands'));
       el.replaceWith(svg);
+      if (vehicle && key === 'fa-car-side') {
+        const label = vehicle.querySelector('span');
+        if (label) {
+          label.textContent = 'OBD VEHÍCULO';
+          label.style.marginTop = '3px';
+          label.style.color = '#9bcfe7';
+          label.style.fontSize = '.62rem';
+          label.style.letterSpacing = '.11em';
+          label.style.textShadow = '0 0 10px rgba(24,168,255,.24)';
+          label.style.whiteSpace = 'nowrap';
+        }
+      }
     });
   };
 
