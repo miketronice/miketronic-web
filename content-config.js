@@ -1,16 +1,22 @@
 // CONTENIDOS DESTACADOS
 // Edita este archivo para cambiar las tres cajas de "Últimos contenidos".
+// Galería: añade o sustituye imágenes en el array "images".
 // YouTube: basta con cambiar la URL del vídeo.
 // Electromecánikos: esta caja dirige a tus entradas con la etiqueta Miketronic.
 
 window.MIKETRONIC_CONTENT = [
   {
-    type: 'article',
-    url: 'AQUI_ENLACE_CAJA_1',
-    tag: 'LLAVES',
-    title: 'Aquí irá un artículo o contenido destacado',
-    description: 'Texto breve de ejemplo para presentar el contenido.',
-    image: ''
+    type: 'gallery',
+    tag: 'GALERÍA',
+    title: 'Trabajos y proyectos',
+    description: 'Una selección visual de trabajos, electrónica y proyectos de Miketronic.',
+    images: [
+      'assets/about/foto-1.jpg',
+      'assets/about/foto-2.jpg',
+      'assets/about/foto-3.jpg',
+      'assets/about/foto-4.jpg',
+      'assets/about/foto-5.jpg'
+    ]
   },
   {
     type: 'youtube',
@@ -49,7 +55,6 @@ const applyProjectArtwork = (selector, imageUrl) => {
 
   const updateProjectArtwork = () => {
     if (projectMedia.matches) {
-      // En móvil eliminamos el gran radial de la caja y dejamos solo un halo corto pegado a la imagen.
       projectArt.style.background = 'transparent';
       mark.style.boxShadow = '0 0 16px rgba(24,168,255,.16)';
     } else {
@@ -65,7 +70,6 @@ const applyProjectArtwork = (selector, imageUrl) => {
 applyProjectArtwork('.project-art-one', 'assets/about/logo_electromecanikos.es_2.jpg');
 applyProjectArtwork('.project-art-two', 'assets/about/mtmanager_miketronic.jpg');
 
-// Enlace directo al proyecto Electromecánikos.
 const electromecanikosProjectLink = document.querySelector('.project-card:first-child .text-link');
 if (electromecanikosProjectLink) {
   electromecanikosProjectLink.href = 'https://www.electromecanikos.es/';
