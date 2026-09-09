@@ -2,12 +2,13 @@
    Brand icon paths: Simple Icons (CC0-1.0). Generic icons are local stroke SVGs. */
 (() => {
   const stroke = (body) => `<svg class="site-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
+  const thinStroke = (body) => `<svg class="site-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
   const fill = (path) => `<svg class="site-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="${path}"/></svg>`;
   const icons = {
     'fa-laptop-code': stroke('<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20M9 9l-2 2 2 2M15 9l2 2-2 2"/>'),
     'fa-microchip': stroke('<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 9h6v6H9zM9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>'),
     'fa-key': stroke('<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l2 2M18 5l2 2"/>'),
-    'fa-car-side': stroke('<path d="M3 15.5v-2.1c0-1 .6-1.8 1.5-2.1l1.3-.4 2-4.1c.35-.7 1.05-1.1 1.85-1.1h5.9c.8 0 1.5.4 1.9 1.05l2.1 3.45 1.3.45c.7.25 1.2.9 1.2 1.65v3.2"/><path d="M5 15.5h14M7.2 10.9h10.9M8.4 7.7h6.9"/><circle cx="6.5" cy="16.5" r="2"/><circle cx="18.5" cy="16.5" r="2"/>'),
+    'fa-car-side': thinStroke('<path d="M2.7 15.3v-2c0-.85.5-1.55 1.3-1.82l1.65-.56 2.12-3.86a2.15 2.15 0 0 1 1.88-1.11h5.72c.75 0 1.45.39 1.84 1.03l2.32 3.78 1.28.43c.9.3 1.49 1.13 1.49 2.08v2.03"/><path d="M4.8 15.3h1.05m2.95 0h6.4m2.95 0h3.05M6.05 10.78h13.25M8.35 7.55h6.55"/><circle cx="7.3" cy="15.55" r="1.65"/><circle cx="16.7" cy="15.55" r="1.65"/>'),
     'fa-headset': stroke('<path d="M4 14v-2a8 8 0 0 1 16 0v2M4 14h3v6H5a1 1 0 0 1-1-1v-5ZM20 14h-3v6h2a1 1 0 0 0 1-1v-5ZM17 20c0 1-2 2-4 2"/>'),
     'fa-file-lines': stroke('<path d="M6 2h8l4 4v16H6zM14 2v5h5M9 12h6M9 16h6"/>'),
     'fa-images': stroke('<rect x="3" y="5" width="16" height="14" rx="2"/><path d="M7 15l3-3 3 3 2-2 4 4M8 9h.01M7 3h14v14"/>'),
