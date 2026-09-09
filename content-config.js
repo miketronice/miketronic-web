@@ -36,6 +36,11 @@ window.MIKETRONIC_CONTENT = [
   }
 ];
 
+// Alineación uniforme del menú superior.
+const navAlignmentStyle = document.createElement('style');
+navAlignmentStyle.textContent = `.nav-links{align-items:center}.nav-links>a{display:inline-flex;align-items:center;min-height:38px}.nav-services{padding-top:0!important;padding-bottom:0!important}`;
+document.head.appendChild(navAlignmentStyle);
+
 // Tratamiento visual circular y desvanecido para las imágenes de los proyectos.
 const projectMedia = window.matchMedia('(max-width: 620px)');
 const applyProjectArtwork = (selector, imageUrl) => {
