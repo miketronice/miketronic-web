@@ -1,0 +1,41 @@
+name: Optimize website images
+
+on:
+  push:
+    paths:
+      - '.github/workflows/optimize-images.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install WebP tools
+        run: sudo apt-get update && sudo apt-get install -y webp
+
+      - name: Create optimized WebP versions
+        run: |
+          for i in 1 2 3 4 5; do
+            cwebp -quiet -mt -q 82 "assets/about/foto-$i.jpg" -o "assets/about/foto-$i.webp"
+          done
+          cwebp -quiet -mt -q 82 assets/about/logo_electromecanikos.es.jpg -o assets/about/logo_electromecanikos.es.webp
+          cwebp -quiet -mt -q 82 assets/about/logo_electromecanikos.es_2.jpg -o assets/about/logo_electromecanikos.es_2.webp
+          cwebp -quiet -mt -q 82 assets/about/mtmanager_miketronic.jpg -o assets/about/mtmanager_miketronic.webp
+
+      - name: Commit optimized images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/about/*.webp
+          if git diff --cached --quiet; then
+            echo "No image changes to commit"
+          else
+            git commit -m "Add optimized WebP website images"
+            git push
+          fi
