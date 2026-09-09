@@ -8,8 +8,8 @@ window.MIKETRONIC_CONTENT = [
   {
     type: 'gallery',
     tag: 'GALERÍA',
-    title: 'Trabajos y proyectos',
-    description: 'Una selección visual de trabajos, electrónica y proyectos de Miketronic.',
+    title: 'Trabajos recientes',
+    description: '',
     images: [
       'assets/about/foto-1.jpg',
       'assets/about/foto-2.jpg',
