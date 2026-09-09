@@ -24,6 +24,13 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+const heroStats = document.querySelectorAll('.hero-stats > div span');
+if (heroStats.length >= 3) {
+  heroStats[0].textContent = 'Años de experiencia';
+  heroStats[1].textContent = 'Soluciones profesionales';
+  heroStats[2].textContent = 'Mejora de servicios continua';
+}
+
 const aboutPills = document.querySelector('.about-copy .pill-row');
 aboutPills?.remove();
 
