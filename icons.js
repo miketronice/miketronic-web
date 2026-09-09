@@ -9,6 +9,7 @@
     'fa-microchip': stroke('<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 9h6v6H9zM9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>'),
     'fa-key': stroke('<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l2 2M18 5l2 2"/>'),
     'fa-car-side': thinStroke('<path d="M2.7 15.3v-2c0-.85.5-1.55 1.3-1.82l1.65-.56 2.12-3.86a2.15 2.15 0 0 1 1.88-1.11h5.72c.75 0 1.45.39 1.84 1.03l2.32 3.78 1.28.43c.9.3 1.49 1.13 1.49 2.08v2.03"/><path d="M4.8 15.3h1.05m2.95 0h6.4m2.95 0h3.05M6.05 10.78h13.25M8.35 7.55h6.55"/><circle cx="7.3" cy="15.55" r="1.65"/><circle cx="16.7" cy="15.55" r="1.65"/>'),
+    'fa-car-front-custom': thinStroke('<path d="M5.2 18.7v1.1c0 .7.55 1.2 1.2 1.2h1.05c.65 0 1.2-.5 1.2-1.2v-.8h6.7v.8c0 .7.55 1.2 1.2 1.2h1.05c.65 0 1.2-.5 1.2-1.2v-1.1"/><path d="M4.2 18.7V12.6c0-1 .38-1.92 1.08-2.62l1.15-1.15 1.03-3.25A2.25 2.25 0 0 1 9.6 4h4.8c1 0 1.88.65 2.14 1.58l1.03 3.25 1.15 1.15c.7.7 1.08 1.62 1.08 2.62v6.1Z"/><path d="M7 8.85h10M4.7 14.2h14.6M7.2 17.4h9.6"/><circle cx="7.2" cy="12.4" r="1.05"/><circle cx="16.8" cy="12.4" r="1.05"/><path d="M9.25 12.4h5.5"/>'),
     'fa-headset': stroke('<path d="M4 14v-2a8 8 0 0 1 16 0v2M4 14h3v6H5a1 1 0 0 1-1-1v-5ZM20 14h-3v6h2a1 1 0 0 0 1-1v-5ZM17 20c0 1-2 2-4 2"/>'),
     'fa-file-lines': stroke('<path d="M6 2h8l4 4v16H6zM14 2v5h5M9 12h6M9 16h6"/>'),
     'fa-images': stroke('<rect x="3" y="5" width="16" height="14" rx="2"/><path d="M7 15l3-3 3 3 2-2 4 4M8 9h.01M7 3h14v14"/>'),
@@ -32,7 +33,8 @@
 
   const render = (root = document) => {
     root.querySelectorAll('i[class*="fa-"]').forEach(el => {
-      const key = [...el.classList].find(c => icons[c]);
+      let key = [...el.classList].find(c => icons[c]);
+      if (key === 'fa-car-side' && el.closest('.vehicle')) key = 'fa-car-front-custom';
       if (!key) return;
       const wrap = document.createElement('span');
       wrap.innerHTML = icons[key];
@@ -41,6 +43,17 @@
       el.replaceWith(svg);
     });
   };
+
   render();
+
+  const dynamicIcons = new MutationObserver(mutations => {
+    mutations.forEach(mutation => mutation.addedNodes.forEach(node => {
+      if (node.nodeType !== 1) return;
+      if (node.matches?.('i[class*="fa-"]')) render(node.parentElement || document);
+      else if (node.querySelector?.('i[class*="fa-"]')) render(node);
+    }));
+  });
+  dynamicIcons.observe(document.documentElement, { childList: true, subtree: true });
+
   window.MiketronicIcons = { render };
 })();
