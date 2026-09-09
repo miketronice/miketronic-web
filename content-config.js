@@ -51,6 +51,8 @@ if (specialtiesGrid) {
 }
 
 // Tratamiento visual circular y desvanecido para las imágenes de los proyectos.
+// Se inicializa cuando la sección se aproxima al viewport para no descargar
+// imágenes de proyectos durante la carga inicial de la portada.
 const projectMedia = window.matchMedia('(max-width: 620px)');
 const applyProjectArtwork = (selector, imageUrl) => {
   const projectArt = document.querySelector(selector);
@@ -81,8 +83,23 @@ const applyProjectArtwork = (selector, imageUrl) => {
   projectMedia.addEventListener?.('change', updateProjectArtwork);
 };
 
-applyProjectArtwork('.project-art-one', 'assets/about/logo_electromecanikos.es_2.jpg');
-applyProjectArtwork('.project-art-two', 'assets/about/mtmanager_miketronic.jpg');
+const initProjectArtwork = () => {
+  applyProjectArtwork('.project-art-one', 'assets/about/logo_electromecanikos.es_2.jpg');
+  applyProjectArtwork('.project-art-two', 'assets/about/mtmanager_miketronic.jpg');
+};
+
+const projectsSection = document.querySelector('#proyectos');
+if (projectsSection && 'IntersectionObserver' in window) {
+  const projectArtworkObserver = new IntersectionObserver((entries, observer) => {
+    if (entries.some(entry => entry.isIntersecting)) {
+      initProjectArtwork();
+      observer.disconnect();
+    }
+  }, { rootMargin: '500px 0px' });
+  projectArtworkObserver.observe(projectsSection);
+} else {
+  initProjectArtwork();
+}
 
 const electromecanikosProjectLink = document.querySelector('.project-card:first-child .text-link');
 if (electromecanikosProjectLink) {
