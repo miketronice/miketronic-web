@@ -38,8 +38,17 @@ window.MIKETRONIC_CONTENT = [
 
 // Alineación uniforme del menú superior.
 const navAlignmentStyle = document.createElement('style');
-navAlignmentStyle.textContent = `.nav-links{align-items:center}.nav-links>a{display:inline-flex;align-items:center;min-height:38px}.nav-services{padding-top:0!important;padding-bottom:0!important}`;
+navAlignmentStyle.textContent = `.nav-links{align-items:center}.nav-links>a{display:inline-flex;align-items:center;min-height:38px}.nav-services{padding-top:0!important;padding-bottom:0!important}.specialties-services-link{display:flex;justify-content:center;margin-top:30px}.specialties-services-link .btn{min-width:210px;justify-content:center}@media(max-width:620px){.specialties-services-link{margin-top:24px}}`;
 document.head.appendChild(navAlignmentStyle);
+
+// Acceso al listado completo de servicios desde Especialidades.
+const specialtiesGrid = document.querySelector('#especialidades .services-grid');
+if (specialtiesGrid) {
+  const servicesLinkWrap = document.createElement('div');
+  servicesLinkWrap.className = 'specialties-services-link reveal';
+  servicesLinkWrap.innerHTML = `<a class="btn btn-ghost" href="servicios.html">Ver todos los servicios <span>→</span></a>`;
+  specialtiesGrid.insertAdjacentElement('afterend', servicesLinkWrap);
+}
 
 // Tratamiento visual circular y desvanecido para las imágenes de los proyectos.
 const projectMedia = window.matchMedia('(max-width: 620px)');
