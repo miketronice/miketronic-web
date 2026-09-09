@@ -67,40 +67,69 @@ window.addEventListener('resize', placeProjectArtwork, { passive:true });
 const setupHeroDiagnosticAnimation = () => {
   const stage = document.querySelector('.tech-visual');
   if (!stage) return;
+
   const style = document.createElement('style');
   style.textContent = `
-  .diag-demo{position:relative;min-height:430px;height:100%;overflow:hidden;background:radial-gradient(circle at 48% 39%,rgba(24,168,255,.13),transparent 37%),linear-gradient(155deg,#091720,#050c12 72%);font-family:Inter,system-ui,sans-serif}
+  .diag-demo{position:relative;min-height:430px;height:100%;overflow:hidden;background:radial-gradient(circle at 50% 39%,rgba(24,168,255,.13),transparent 37%),linear-gradient(155deg,#091720,#050c12 72%);font-family:Inter,system-ui,sans-serif}
   .diag-demo:before{content:"";position:absolute;inset:0;opacity:.15;background-image:linear-gradient(rgba(92,200,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(92,200,255,.12) 1px,transparent 1px);background-size:30px 30px;mask-image:linear-gradient(to bottom,transparent,#000 17%,#000 82%,transparent)}
   .diag-head{position:absolute;left:22px;right:22px;top:18px;display:flex;justify-content:space-between;align-items:center;color:#6f91a4;font-size:.58rem;letter-spacing:.14em;z-index:5}.diag-head strong{color:#8bdcff;font-size:.62rem}.diag-live{display:flex;align-items:center;gap:7px}.diag-live:before{content:"";width:6px;height:6px;border-radius:50%;background:#5cc8ff;box-shadow:0 0 10px #18a8ff;animation:diagBlink 1.2s ease-in-out infinite}
-  .diag-scene{position:absolute;left:5%;right:5%;top:19%;height:176px;display:grid;grid-template-columns:132px 1fr 118px;align-items:center;gap:10px;z-index:2}
-  .technician{height:150px;position:relative;justify-self:center;width:126px}.desk{position:absolute;left:4px;right:2px;bottom:18px;height:5px;border-radius:4px;background:#456274;box-shadow:0 0 9px rgba(92,200,255,.18)}.desk:before,.desk:after{content:"";position:absolute;top:4px;width:4px;height:28px;background:#314957}.desk:before{left:10px}.desk:after{right:10px}
-  .monitor{position:absolute;right:5px;bottom:54px;width:59px;height:43px;border:2px solid #53778b;border-radius:5px;background:#07131a;box-shadow:0 0 15px rgba(24,168,255,.16);transform:perspective(90px) rotateY(-4deg)}.monitor:after{content:"";position:absolute;left:27px;top:43px;width:4px;height:13px;background:#53778b}.screen-lines{position:absolute;inset:6px;overflow:hidden;background:linear-gradient(180deg,rgba(24,168,255,.05),rgba(24,168,255,.01))}.screen-lines:before{content:"";position:absolute;left:3px;right:9px;top:7px;height:2px;background:#5cc8ff;box-shadow:0 7px 0 #2d6d92,0 14px 0 #5cc8ff,13px 21px 0 #2d6d92;animation:screenWork 1.1s steps(2,end) infinite}
-  .person-head{position:absolute;left:24px;bottom:93px;width:27px;height:30px;border-radius:50% 50% 44% 44%;background:#b7c7cf;border:1px solid #d9e8ee;animation:headWork 2.1s ease-in-out infinite;transform-origin:50% 100%}.person-body{position:absolute;left:15px;bottom:48px;width:45px;height:51px;border-radius:17px 17px 7px 7px;background:linear-gradient(145deg,#183c52,#0b2331);border:1px solid rgba(92,200,255,.25)}.person-body:after{content:"";position:absolute;left:7px;top:13px;width:25px;height:2px;background:rgba(92,200,255,.42)}
-  .arm{position:absolute;left:48px;bottom:58px;width:43px;height:9px;border-radius:9px;background:#17384b;transform-origin:3px 50%;transform:rotate(15deg);animation:typeArm .62s ease-in-out infinite alternate}.hand{position:absolute;right:-5px;top:0;width:9px;height:9px;border-radius:50%;background:#b7c7cf}.keyboard{position:absolute;left:64px;bottom:42px;width:38px;height:7px;border:1px solid #4e7184;border-radius:2px;transform:skewX(-16deg);background:#0a1820}.work-label{position:absolute;left:4px;bottom:0;color:#6a91a7;font-size:.43rem;letter-spacing:.12em;white-space:nowrap}
-  .vehicle{justify-self:center;text-align:center;color:#d8f3ff;position:relative}.vehicle i{font-size:4.3rem;color:#cdefff;filter:drop-shadow(0 0 16px rgba(24,168,255,.28));transition:filter .3s ease}.diag-demo.is-communicating .vehicle i{filter:drop-shadow(0 0 23px rgba(24,168,255,.5))}.vehicle span{display:block;margin-top:5px;color:#6c94aa;font-size:.54rem;letter-spacing:.14em;font-weight:700}
+  .diag-scene{position:absolute;left:5%;right:5%;top:18%;height:188px;display:grid;grid-template-columns:142px 72px 1fr 118px;align-items:center;gap:8px;z-index:2}
+  .pc-unit{justify-self:center;width:132px;height:112px;position:relative}.pc-screen{position:absolute;left:8px;right:8px;top:0;height:76px;border:2px solid #5d8093;border-radius:7px;background:#06131b;box-shadow:0 0 20px rgba(24,168,255,.18),inset 0 0 18px rgba(24,168,255,.04);overflow:hidden}.pc-screen:after{content:"";position:absolute;left:50%;bottom:-16px;width:5px;height:16px;background:#58798a;transform:translateX(-50%)}.pc-base{position:absolute;left:32px;right:32px;bottom:15px;height:5px;border-radius:5px;background:#58798a}.pc-base:after{content:"";position:absolute;left:-18px;right:-18px;top:5px;height:4px;border-radius:5px;background:#3a5665}
+  .screen-ui{position:absolute;inset:7px;display:flex;flex-direction:column;gap:6px}.screen-title{font:700 .54rem 'Space Grotesk';letter-spacing:.1em;color:#dff5ff}.screen-progress{height:5px;border-radius:10px;background:rgba(255,255,255,.08);overflow:hidden}.screen-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#157dff,#5cc8ff);box-shadow:0 0 8px #18a8ff;transition:width .05s linear}.screen-log{display:grid;gap:4px}.screen-log i{display:block;height:2px;border-radius:4px;background:#2c5e78;opacity:.78}.screen-log i:nth-child(2){width:78%;background:#5cc8ff}.screen-log i:nth-child(3){width:62%}.screen-log i:nth-child(4){width:86%;background:#367ca3}.diag-demo.is-communicating .screen-log{animation:screenTraffic .8s steps(2,end) infinite}
+  .vci{justify-self:center;width:62px;height:44px;border:1px solid rgba(92,200,255,.44);border-radius:10px;background:linear-gradient(155deg,#112430,#08131b);box-shadow:0 0 20px rgba(24,168,255,.14),inset 0 0 14px rgba(24,168,255,.05);position:relative;display:flex;align-items:center;justify-content:center;font:700 .62rem 'Space Grotesk';letter-spacing:.12em;color:#dff5ff}.vci:before,.vci:after{content:"";position:absolute;top:50%;width:15px;height:2px;background:#5cc8ff;box-shadow:0 0 8px #18a8ff}.vci:before{right:100%}.vci:after{left:100%}.vci-led{position:absolute;right:8px;top:7px;width:5px;height:5px;border-radius:50%;background:#5cc8ff;box-shadow:0 0 9px #18a8ff;animation:diagBlink .8s ease-in-out infinite}
   .data-link{height:60px;position:relative}.data-wire{position:absolute;left:0;right:0;top:29px;height:2px;background:linear-gradient(90deg,rgba(92,200,255,.18),#5cc8ff 35%,#18a8ff 65%,rgba(92,200,255,.18));box-shadow:0 0 10px rgba(24,168,255,.28)}.data-wire:before,.data-wire:after{content:"";position:absolute;top:-3px;width:8px;height:8px;border-radius:50%;background:#5cc8ff;box-shadow:0 0 10px #18a8ff}.data-wire:before{left:-1px}.data-wire:after{right:-1px}
   .data-packet{position:absolute;top:25px;width:10px;height:10px;border-radius:3px;background:#8ee2ff;box-shadow:0 0 12px #18a8ff;opacity:0}.diag-demo.is-running .data-packet{animation:packetOut 1.05s linear infinite}.diag-demo.is-running .packet-2{animation-delay:.34s}.diag-demo.is-running .packet-3{animation-delay:.68s}.packet-back{display:none;background:#317cff}.diag-demo.is-communicating .packet-back{display:block;animation:packetBack 1.2s linear infinite;animation-delay:.2s}
+  .vehicle{justify-self:center;text-align:center;color:#d8f3ff;position:relative}.vehicle i{font-size:4.3rem;color:#cdefff;filter:drop-shadow(0 0 16px rgba(24,168,255,.28));transition:filter .3s ease}.diag-demo.is-communicating .vehicle i{filter:drop-shadow(0 0 23px rgba(24,168,255,.5))}.vehicle span{display:block;margin-top:5px;color:#6c94aa;font-size:.54rem;letter-spacing:.14em;font-weight:700}
   .diag-panel{position:absolute;left:9%;right:9%;bottom:30px;padding:16px 18px 14px;border:1px solid rgba(92,200,255,.19);border-radius:15px;background:rgba(5,13,19,.78);backdrop-filter:blur(10px);z-index:4;box-shadow:0 12px 34px rgba(0,0,0,.22)}.diag-phase-row{display:flex;justify-content:space-between;align-items:flex-end;gap:16px}.diag-phase-label{color:#6c91a6;font-size:.55rem;letter-spacing:.16em;margin-bottom:3px}.diag-phase{font:700 1.03rem 'Space Grotesk';letter-spacing:.08em;color:#dff5ff;text-transform:uppercase}.diag-counter{font:700 1.45rem 'Space Grotesk';color:#5cc8ff;min-width:74px;text-align:right;text-shadow:0 0 14px rgba(24,168,255,.35)}.diag-progress{height:5px;border-radius:99px;margin-top:12px;background:rgba(255,255,255,.07);overflow:hidden}.diag-progress span{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#157dff,#5cc8ff);box-shadow:0 0 12px rgba(24,168,255,.55);transition:width .05s linear}.diag-demo.is-communicating .diag-progress span{width:100%!important;animation:commPulse 1.35s ease-in-out infinite}.diag-substatus{display:flex;justify-content:space-between;gap:10px;margin-top:9px;color:#54798f;font-size:.48rem;letter-spacing:.13em}.diag-substatus .active{color:#7dd9ff}
-  @keyframes packetOut{0%{left:0;opacity:0;transform:scale(.7)}10%{opacity:1}90%{opacity:1}100%{left:calc(100% - 10px);opacity:0;transform:scale(1)}}@keyframes packetBack{0%{left:calc(100% - 10px);opacity:0}10%{opacity:.9}90%{opacity:.9}100%{left:0;opacity:0}}@keyframes commPulse{0%,100%{opacity:.45}50%{opacity:1}}@keyframes diagBlink{50%{opacity:.3;transform:scale(.75)}}@keyframes headWork{0%,100%{transform:rotate(0)}45%{transform:rotate(5deg)}70%{transform:rotate(-2deg)}}@keyframes typeArm{from{transform:rotate(11deg) translateY(0)}to{transform:rotate(17deg) translateY(2px)}}@keyframes screenWork{0%{transform:translateY(0);opacity:.65}50%{transform:translateY(2px);opacity:1}100%{transform:translateY(0);opacity:.75}}
-  @media(max-width:620px){.diag-demo{min-height:360px}.diag-scene{left:4%;right:4%;top:18%;height:143px;grid-template-columns:96px 1fr 80px;gap:5px}.technician{width:92px;height:125px;transform:scale(.78);transform-origin:center}.vehicle i{font-size:3.1rem}.vehicle span{font-size:.44rem}.diag-panel{left:6%;right:6%;bottom:20px;padding:14px}.diag-phase{font-size:.82rem}.diag-counter{font-size:1.15rem;min-width:62px}.diag-head{left:16px;right:16px;top:14px}.diag-substatus{font-size:.4rem}}
-  @media(prefers-reduced-motion:reduce){.diag-live:before,.data-packet,.diag-progress span,.person-head,.arm,.screen-lines:before{animation:none!important}}
+  @keyframes packetOut{0%{left:0;opacity:0;transform:scale(.7)}10%{opacity:1}90%{opacity:1}100%{left:calc(100% - 10px);opacity:0;transform:scale(1)}}@keyframes packetBack{0%{left:calc(100% - 10px);opacity:0}10%{opacity:.9}90%{opacity:.9}100%{left:0;opacity:0}}@keyframes commPulse{0%,100%{opacity:.45}50%{opacity:1}}@keyframes diagBlink{50%{opacity:.3;transform:scale(.75)}}@keyframes screenTraffic{0%{transform:translateY(0);opacity:.68}50%{transform:translateY(2px);opacity:1}100%{transform:translateY(0);opacity:.8}}
+  @media(max-width:620px){.diag-demo{min-height:360px}.diag-scene{left:4%;right:4%;top:17%;height:150px;grid-template-columns:96px 48px 1fr 76px;gap:4px}.pc-unit{width:94px;height:92px}.pc-screen{left:4px;right:4px;height:58px}.pc-base{left:25px;right:25px;bottom:18px}.screen-ui{inset:5px;gap:4px}.screen-title{font-size:.42rem}.vci{width:44px;height:34px;font-size:.48rem}.vci:before,.vci:after{width:10px}.vehicle i{font-size:3rem}.vehicle span{font-size:.42rem}.diag-panel{left:6%;right:6%;bottom:20px;padding:14px}.diag-phase{font-size:.82rem}.diag-counter{font-size:1.15rem;min-width:62px}.diag-head{left:16px;right:16px;top:14px}.diag-substatus{font-size:.4rem}}
+  @media(prefers-reduced-motion:reduce){.diag-live:before,.vci-led,.data-packet,.diag-progress span,.screen-log{animation:none!important}}
   `;
   document.head.appendChild(style);
-  stage.innerHTML = `<div class="diag-demo is-running" aria-label="Electromecánico comunicando con un vehículo mediante diagnosis">
+
+  stage.innerHTML = `<div class="diag-demo is-running" aria-label="Ordenador conectado a una VCI de diagnosis y a un vehículo">
     <div class="diag-head"><strong>MIKETRONIC</strong><span class="diag-live">LINK ACTIVO</span></div>
     <div class="diag-scene">
-      <div class="technician" aria-label="Electromecánico trabajando con un ordenador"><div class="person-head"></div><div class="person-body"></div><div class="arm"><span class="hand"></span></div><div class="monitor"><span class="screen-lines"></span></div><div class="keyboard"></div><div class="desk"></div><span class="work-label">ELECTROMECÁNICO</span></div>
+      <div class="pc-unit" aria-label="Ordenador de diagnosis"><div class="pc-screen"><div class="screen-ui"><div class="screen-title">CODIFICANDO</div><div class="screen-progress"><span></span></div><div class="screen-log"><i></i><i></i><i></i><i></i></div></div></div><div class="pc-base"></div></div>
+      <div class="vci" aria-label="VCI de diagnosis">VCI<span class="vci-led"></span></div>
       <div class="data-link" aria-hidden="true"><div class="data-wire"></div><span class="data-packet packet-1"></span><span class="data-packet packet-2"></span><span class="data-packet packet-3"></span><span class="data-packet packet-back"></span></div>
       <div class="vehicle"><i class="fa-solid fa-car-side"></i><span>VEHÍCULO</span></div>
     </div>
     <div class="diag-panel"><div class="diag-phase-row"><div><div class="diag-phase-label">PROCESO ACTUAL</div><div class="diag-phase">DIAGNOSTICANDO</div></div><div class="diag-counter">0%</div></div><div class="diag-progress"><span></span></div><div class="diag-substatus"><span class="active">CAN / UDS ONLINE</span><span>TX ↔ RX</span><span>12.4 V</span></div></div>
   </div>`;
-  const demo=stage.querySelector('.diag-demo'), phaseEl=stage.querySelector('.diag-phase'), counterEl=stage.querySelector('.diag-counter'), progressEl=stage.querySelector('.diag-progress span');
-  if (!demo || !phaseEl || !counterEl || !progressEl) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { phaseEl.textContent='COMUNICANDO';counterEl.textContent='ONLINE';progressEl.style.width='100%';demo.classList.add('is-communicating');return; }
+
+  const demo=stage.querySelector('.diag-demo');
+  const phaseEl=stage.querySelector('.diag-phase');
+  const counterEl=stage.querySelector('.diag-counter');
+  const progressEl=stage.querySelector('.diag-progress span');
+  const screenTitle=stage.querySelector('.screen-title');
+  const screenProgress=stage.querySelector('.screen-progress span');
+  if (!demo || !phaseEl || !counterEl || !progressEl || !screenTitle || !screenProgress) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    phaseEl.textContent='COMUNICANDO';counterEl.textContent='ONLINE';progressEl.style.width='100%';screenTitle.textContent='ONLINE';screenProgress.style.width='100%';demo.classList.add('is-communicating');return;
+  }
+
   const phases=[{label:'DIAGNOSTICANDO',duration:1900},{label:'CODIFICANDO',duration:1750},{label:'PROGRAMANDO',duration:2100}];
-  const runPhase=({label,duration})=>new Promise(resolve=>{phaseEl.textContent=label;let start=0;const tick=t=>{if(!start)start=t;const ratio=Math.min((t-start)/duration,1),eased=1-Math.pow(1-ratio,2.2),value=Math.min(100,Math.round(eased*100));counterEl.textContent=`${value}%`;progressEl.style.width=`${value}%`;if(ratio<1)requestAnimationFrame(tick);else setTimeout(resolve,260)};requestAnimationFrame(tick)});
-  (async()=>{for(const phase of phases){progressEl.style.width='0%';counterEl.textContent='0%';await runPhase(phase)}phaseEl.textContent='COMUNICANDO';counterEl.textContent='ONLINE';progressEl.style.width='100%';demo.classList.add('is-communicating')})();
+  const runPhase=({label,duration})=>new Promise(resolve=>{
+    phaseEl.textContent=label;
+    screenTitle.textContent=label;
+    let start=0;
+    const tick=t=>{
+      if(!start)start=t;
+      const ratio=Math.min((t-start)/duration,1),eased=1-Math.pow(1-ratio,2.2),value=Math.min(100,Math.round(eased*100));
+      counterEl.textContent=`${value}%`;
+      progressEl.style.width=`${value}%`;
+      screenProgress.style.width=`${value}%`;
+      if(ratio<1)requestAnimationFrame(tick);else setTimeout(resolve,260)
+    };
+    requestAnimationFrame(tick)
+  });
+
+  (async()=>{
+    for(const phase of phases){progressEl.style.width='0%';screenProgress.style.width='0%';counterEl.textContent='0%';await runPhase(phase)}
+    phaseEl.textContent='COMUNICANDO';counterEl.textContent='ONLINE';progressEl.style.width='100%';screenTitle.textContent='COMUNICANDO';screenProgress.style.width='100%';demo.classList.add('is-communicating')
+  })();
 };
 setupHeroDiagnosticAnimation();
 
