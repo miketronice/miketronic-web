@@ -11,11 +11,11 @@ window.MIKETRONIC_CONTENT = [
     title: 'Trabajos recientes',
     description: '',
     images: [
-      'assets/about/foto-1.webp',
-      'assets/about/foto-2.webp',
-      'assets/about/foto-3.webp',
-      'assets/about/foto-4.webp',
-      'assets/about/foto-5.webp'
+      'assets/carousel-trabajos/foto-1.webp',
+      'assets/carousel-trabajos/foto-2.webp',
+      'assets/carousel-trabajos/foto-3.webp',
+      'assets/carousel-trabajos/foto-4.webp',
+      'assets/carousel-trabajos/foto-5.webp'
     ]
   },
   {
