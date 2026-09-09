@@ -4,6 +4,7 @@
   const stroke = (body) => `<svg class="site-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
   const thinStroke = (body) => `<svg class="site-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
   const fill = (path) => `<svg class="site-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="${path}"/></svg>`;
+  const obdPort = `<svg class="site-icon obd-port-icon" viewBox="0 0 64 42" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"><path d="M10 7h44l6 7v17l-6 5H10l-6-5V14z"/><path d="M14 12h36l4 4v13l-4 3H14l-4-3V16z"/><g fill="currentColor" stroke="none"><circle cx="16" cy="19" r="1.35"/><circle cx="22" cy="19" r="1.35"/><circle cx="28" cy="19" r="1.35"/><circle cx="34" cy="19" r="1.35"/><circle cx="40" cy="19" r="1.35"/><circle cx="46" cy="19" r="1.35"/><circle cx="19" cy="26" r="1.35"/><circle cx="25" cy="26" r="1.35"/><circle cx="31" cy="26" r="1.35"/><circle cx="37" cy="26" r="1.35"/><circle cx="43" cy="26" r="1.35"/></g><path d="M18 9v3M46 9v3" opacity=".5"/></svg>`;
   const icons = {
     'fa-laptop-code': stroke('<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20M9 9l-2 2 2 2M15 9l2 2-2 2"/>'),
     'fa-microchip': stroke('<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 9h6v6H9zM9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>'),
@@ -34,10 +35,9 @@
   const render = (root = document) => {
     root.querySelectorAll('i[class*="fa-"]').forEach(el => {
       let key = [...el.classList].find(c => icons[c]);
-      if (key === 'fa-car-side' && el.closest('.vehicle')) key = 'fa-car-front-custom';
       if (!key) return;
       const wrap = document.createElement('span');
-      wrap.innerHTML = icons[key];
+      wrap.innerHTML = el.closest('.vehicle') && key === 'fa-car-side' ? obdPort : icons[key];
       const svg = wrap.firstElementChild;
       svg.classList.add(...[...el.classList].filter(c => !c.startsWith('fa-') && c !== 'fa-solid' && c !== 'fa-regular' && c !== 'fa-brands'));
       el.replaceWith(svg);
