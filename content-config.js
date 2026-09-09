@@ -11,11 +11,11 @@ window.MIKETRONIC_CONTENT = [
     title: 'Trabajos recientes',
     description: '',
     images: [
-      'assets/about/foto-1.jpg',
-      'assets/about/foto-2.jpg',
-      'assets/about/foto-3.jpg',
-      'assets/about/foto-4.jpg',
-      'assets/about/foto-5.jpg'
+      'assets/about/foto-1.webp',
+      'assets/about/foto-2.webp',
+      'assets/about/foto-3.webp',
+      'assets/about/foto-4.webp',
+      'assets/about/foto-5.webp'
     ]
   },
   {
@@ -84,8 +84,8 @@ const applyProjectArtwork = (selector, imageUrl) => {
 };
 
 const initProjectArtwork = () => {
-  applyProjectArtwork('.project-art-one', 'assets/about/logo_electromecanikos.es_2.jpg');
-  applyProjectArtwork('.project-art-two', 'assets/about/mtmanager_miketronic.jpg');
+  applyProjectArtwork('.project-art-one', 'assets/about/logo_electromecanikos.es_2.webp');
+  applyProjectArtwork('.project-art-two', 'assets/about/mtmanager_miketronic.webp');
 };
 
 const projectsSection = document.querySelector('#proyectos');
